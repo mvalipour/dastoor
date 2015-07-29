@@ -1,4 +1,5 @@
 # dastoor
+[![travis](https://travis-ci.org/mvalipour/dastoor.svg?branch=master)](https://travis-ci.org/mvalipour/dastoor)
 
 a node.js library to build command-line interface tools.
 
