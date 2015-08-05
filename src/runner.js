@@ -31,11 +31,11 @@ Runner.prototype.run = function (node, args) {
     while(args.length){
         e = args[0];
         if(this._isKey(e)) break;
+
+        args = args.splice(1);
         node = node._getChild(e);
         if(!node) break;
         if(node.$terminal) break;
-
-        args = args.splice(1);
     }
 
     if(node){
@@ -46,7 +46,7 @@ Runner.prototype.run = function (node, args) {
 
         this._onNodeStarting(node);
 
-        var inputArgs = minimist(args.splice(1));
+        var inputArgs = minimist(args);
         extend(inputArgs, this.options.localArgs || {});
         controller.call(node, inputArgs);
     }
