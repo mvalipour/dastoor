@@ -48,7 +48,8 @@ Runner.prototype.run = function (node, args) {
 
         var inputArgs = minimist(args);
         extend(inputArgs, this.options.localArgs || {});
-        controller.call(node, inputArgs);
+        var result = controller.call(node, inputArgs);
+        if(result === 'h') return this.renderHelp(node);
     }
     else{
         this.options.errorLog('command `'+e+'` not found');
