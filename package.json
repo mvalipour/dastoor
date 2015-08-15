@@ -1,6 +1,6 @@
 {
   "name": "dastoor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a node.js library to build command-line interface tools",
   "main": "src/index.js",
   "repository": {
