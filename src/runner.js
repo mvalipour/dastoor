@@ -84,6 +84,19 @@ Runner.prototype.renderHelp = function (node) {
         log();
     }
 
+    if(node.$alias){
+        log('    aliases:');
+        options.forEach(function (o) {
+            var v1 = node.path.replace(/\./g, ' ');
+            var v2 = (node.parentPath ?
+                      node.parentPath.replace(/\./g, ' ') : ''
+                  ) + ' ' +node.$alias;
+            log('      ' + v1);
+            log('      ' + v2);
+        });
+        log();
+    }
+
     if(options){
         log('    options:');
         options.forEach(function (o) {

@@ -16,7 +16,7 @@ function Command(path) {
 
 Command.prototype._getChild = function (name) {
     return this.commands.filter(function (c) {
-        return c.name === name;
+        return c.name === name || c.$alias === name;
     })[0];
 };
 
@@ -34,6 +34,10 @@ Command.prototype.configure = function (config) {
 
         if(config.controller !== undefined) {
             this.controller(config.controller);
+        }
+
+        if(config.alias !== undefined) {
+            this.$alias = config.alias;
         }
     }
 
