@@ -11,6 +11,8 @@ npm install dastoor --save
 
 ## Usage
 
+See: [Build a command-line interface app using node.js and dastoor](http://mvalipour.github.io/node.js/2015/08/15/build-cli-using-nodejs-and-dastoor/).
+
 Create an `index.js` file:
 
 ```javascript
