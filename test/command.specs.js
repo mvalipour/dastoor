@@ -176,3 +176,29 @@ describe('Command:controller()', function () {
         expect(sut.$controller).to.equal(fn);
     });
 });
+
+describe('Command:_getChild()', function () {
+    var sut = new command('app');
+    var c1 = new command('app.test1'),
+        c2 = new command('app.test2'),
+        c3 = (new command('app.test3')).configure({ alias: 't3'}),
+        c4 = new command('app.test4'),
+        c5 = new command('app.test5');
+
+    sut.commands = [c1, c2, c3, c4, c5];
+
+    it('should return correct sub-command when name match', function () {
+        var res = sut._getChild('test4');
+        expect(res).to.equal(c4);
+    });
+
+    it('should return correct sub-command when alias match', function () {
+        var res = sut._getChild('t3');
+        expect(res).to.equal(c3);
+    });
+
+    it('should return null when nothing match', function () {
+        var res = sut._getChild('none');
+        expect(res).to.be.empty;
+    });
+});
