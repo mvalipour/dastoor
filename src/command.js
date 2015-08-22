@@ -58,6 +58,10 @@ Command.prototype.help = function (i) {
 };
 
 Command.prototype.controller = function (controller) {
+    if(typeof controller !== 'function') {
+        throw 'controller must be a function';
+    }
+
     this.$controller = controller;
     return this;
 };

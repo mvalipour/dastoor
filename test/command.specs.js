@@ -153,3 +153,26 @@ describe('Command:help()', function () {
         expect(sut.$help).to.equal(h);
     });
 });
+
+describe('Command:controller()', function () {
+    describe('throws when non-function is passed', function () {
+        var sut = new command('app');
+        function testCase(v) {
+            expect(function () {
+                sut.controller(v);
+            }).to.throw('controller must be a function');
+        }
+
+        it('test-case: nothing', function () { testCase(); });
+        it('test-case: string', function () { testCase('something'); });
+        it('test-case: array', function () { testCase([]); });
+    });
+
+
+    it('when pass function, should set controller', function () {
+        var sut = new command('app');
+        var fn = function () {};
+        sut.controller(fn);
+        expect(sut.$controller).to.equal(fn);
+    });
+});
