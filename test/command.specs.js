@@ -1,7 +1,7 @@
 var expect = require("chai").expect;
 var command = require('../src/command.js');
 
-describe('Command constructor', function () {
+describe('Command:_constructor', function () {
 
     describe('path marginal cases', function () {
         function testCase(p) {
@@ -45,6 +45,9 @@ describe('Command constructor', function () {
         it('should have empty controller', function () {
             expect(sut.$controller).to.be.false;
         });
+        it('should have empty alias', function () {
+            expect(sut.$alias).to.be.empty;
+        });
     });
 
     describe('when called with two parts', function () {
@@ -72,6 +75,48 @@ describe('Command constructor', function () {
         });
         it('should have correct parent path', function () {
             expect(sut.parentPath).to.equal('app.test.foo');
+        });
+    });
+});
+
+describe('Command:configure', function () {
+
+    it('when pass terminal, should set terminal', function () {
+        var sut = new command('app');
+        sut.configure({ terminal: true });
+        expect(sut.$terminal).to.be.true;
+    });
+
+    it('when pass alias, should set alias', function () {
+        var sut = new command('app');
+        sut.configure({ alias: 'test' });
+        expect(sut.$alias).to.equal('test');
+    });
+
+    it('when pass controller, should set controller', function () {
+        var sut = new command('app');
+        var fn = function () {};
+        sut.configure({ controller: fn });
+        expect(sut.$controller).to.equal(fn);
+    });
+
+    it('when pass help, should set help', function () {
+        var sut = new command('app');
+        var h = { some: 'help' };
+        sut.configure({ help: h });
+        expect(sut.$help).to.equal(h);
+    });
+
+    describe('when pass alias and controller (multiple)', function () {
+        var sut = new command('app');
+        var fn = function () {};
+        sut.configure({ alias: 'test', controller: fn });
+
+        it('should set alias', function () {
+            expect(sut.$alias).to.equal('test');
+        });
+        it('should set controller', function () {
+            expect(sut.$controller).to.equal(fn);
         });
     });
 });
