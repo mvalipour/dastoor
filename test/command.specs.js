@@ -1,7 +1,7 @@
 var expect = require("chai").expect;
 var command = require('../src/command.js');
 
-describe('Command:_constructor', function () {
+describe('Command:_constructor()', function () {
 
     describe('path marginal cases', function () {
         function testCase(p) {
@@ -79,7 +79,7 @@ describe('Command:_constructor', function () {
     });
 });
 
-describe('Command:configure', function () {
+describe('Command:configure()', function () {
 
     it('when pass terminal, should set terminal', function () {
         var sut = new command('app');
@@ -107,6 +107,12 @@ describe('Command:configure', function () {
         expect(sut.$help).to.equal(h);
     });
 
+    it('should return command', function () {
+        var sut = new command('app');
+        var res = sut.configure();
+        expect(res).to.equal(sut);
+    });
+
     describe('when pass alias and controller (multiple)', function () {
         var sut = new command('app');
         var fn = function () {};
@@ -118,5 +124,32 @@ describe('Command:configure', function () {
         it('should set controller', function () {
             expect(sut.$controller).to.equal(fn);
         });
+    });
+});
+
+describe('Command:help()', function () {
+    describe('when pass a string', function () {
+        var sut = new command('app');
+        var res = sut.help('some help');
+
+        it('help should be an object', function () {
+            expect(sut.$help).to.be.an('object');
+        });
+
+        it('help should have correct description', function () {
+            expect(sut.$help.description).to.equal('some help');
+        });
+
+        it('should return command', function () {
+            expect(res).to.equal(sut);
+        });
+    });
+
+    it('should set help, when pass an object', function () {
+        var sut = new command('app');
+        var h = { some: 'help' };
+        sut.help(h);
+
+        expect(sut.$help).to.equal(h);
     });
 });
