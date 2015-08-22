@@ -1,4 +1,8 @@
 function Command(path) {
+    if(typeof path !== 'string' || !path) {
+        throw 'path cannot be empty';
+    }
+
     if(!/^[\w\-]+(\.[\w\-]+)*$/g.test(path)) throw 'module path is invalid: ' + path;
 
     var p = path.split('.');
