@@ -1,5 +1,4 @@
-# dastoor
-[![travis](https://travis-ci.org/mvalipour/dastoor.svg?branch=master)](https://travis-ci.org/mvalipour/dastoor)
+# dastoor [![Build Status](https://travis-ci.org/mvalipour/dastoor.svg?branch=master)](https://travis-ci.org/mvalipour/dastoor) [![Coverage Status](https://coveralls.io/repos/mvalipour/dastoor/badge.svg?branch=master)](https://coveralls.io/r/mvalipour/dastoor?branch=master)
 
 a node.js library to build command-line interface tools.
 
